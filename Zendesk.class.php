@@ -92,6 +92,7 @@ class Zendesk{
 		return $return;
 	}
 
+	//Return a redirect URL to Zendesk application
 	public function urlMount(){
 		return $this->urlZendeskAuth.'?'.$this->mountParams().$this->zendeskParams();
 	}
