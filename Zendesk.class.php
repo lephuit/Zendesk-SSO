@@ -12,21 +12,27 @@
  * @example README.md
  */
 class Zendesk{
+	//URL para login remoto
 	//URL to remote auth
 	private $urlZendeskAuth = "https://YOUR_SUBDOMAIN.zendesk.com/access/remoteauth";
 	
+	//Seu hash secreto gerado pelo sistema
 	//Your secret token
 	private $tokenZendesk = "abcd1234";
 
+	//Array para transação de autenticação remota
 	//Transaction Remote Auth array
 	private $remoteData = array();
 
+	//Array de envio de dados do usuário 
 	//Send user data array
 	public $userData = array();
 
+	//Array entregue pelo sistema Zendesk
 	//Send Zendesk data array
 	public $zendeskData = array();
 	
+	//O construtor recebe os dados de usuário e dados do Zendesk e monta um array
 	//Constructor receive a user data from your database and zendesk url get data
 	public function __construct(){
 		//Mount a remote data array
@@ -54,6 +60,7 @@ class Zendesk{
 			);
 	}
 
+	//Monta novos parâmetros para retorno a aplicação Zendesk
 	//Mount new parameters to return Zendesk application 
 	private function zendeskParams(){
 		$return = "";
@@ -64,6 +71,7 @@ class Zendesk{
 		return $return;
 	}
 
+	//Cria um hash baseado em MD5
 	//Create hash MD5 based
 	private function mountHash(){
 		$goToHash = array(
@@ -82,6 +90,7 @@ class Zendesk{
 		return md5($this->goToZendesk);
 	}
 
+	//Finalmente montamos os outros parâmetros
 	//We finally mount other parameters 
 	private function mountParams(){
 		$return = "";
@@ -92,6 +101,7 @@ class Zendesk{
 		return $return;
 	}
 
+	//Retorna a URL de redirecionamento completa para o login remoto
 	//Return a redirect URL to Zendesk application
 	public function urlMount(){
 		return $this->urlZendeskAuth.'?'.$this->mountParams().$this->zendeskParams();
